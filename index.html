@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+    .login-container {
+      margin-top: 100px;
+      background-color: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    /* Resto dos estilos (conforme o código anterior)... */
+  </style>
+</head>
+<img src="https://document-export.canva.com/62AJ8/DAFpXw62AJ8/2/thumbnail/0001.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUHWDTJW6UD%2F20230723%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230723T234533Z&X-Amz-Expires=27409&X-Amz-Signature=c7bf9a450c06e65cca831c8c6ddbe457a4d5348f2e3530aca3c72ddcf2f8a525&X-Amz-SignedHeaders=host&response-expires=Mon%2C%2024%20Jul%202023%2007%3A22%3A22%20GMT" 
+<body>
+  <div class="login-container">
+    <!-- Resto do conteúdo (conforme o código anterior)... -->
+    <form onsubmit="return validarLogin()">
+      <input type="text" id="username" placeholder="Usuário" required><br>
+      <input type="password" id="password" placeholder="Senha" required><br>
+      <input type="submit" value="Entrar">
+    </form>
+    <p class="mensagemErro" id="mensagemErro"></p>
+    <p>Não tem uma conta? <a class="link" href="https://t.me/+09IegxT5FZFiNTIx" target="_blank">Cadastre-se no Telegram</a></p>
+  </div>
+
+  <script>
+    function validarLogin() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Obter os logins salvos no painel administrativo
+      var loginsSalvos = JSON.parse(localStorage.getItem('logins')) || [];
+
+      // Verificar se o login fornecido está na lista de logins salvos
+      for (var i = 0; i < loginsSalvos.length; i++) {
+        if (loginsSalvos[i].username === username && loginsSalvos[i].password === password) {
+          // Login válido, redirecionar para a próxima página após o login bem-sucedido
+          window.location.replace('pagina_principal.html');
+          return false; // Cancelar o envio do formulário para evitar recarregar a página
+        }
+      }
+
+      // Login inválido, exibir mensagem de erro
+      document.getElementById('mensagemErro').innerText = 'Usuário ou senha inválidos';
+      return false; // Cancelar o envio do formulário para evitar recarregar a página
+    }
+  </script>
+</body>
+</html>
